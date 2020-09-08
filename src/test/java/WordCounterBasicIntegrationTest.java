@@ -8,7 +8,7 @@ import java.nio.charset.Charset;
 
 import static org.junit.Assert.assertEquals;
 
-public class WordCounterIntegrationTest {
+public class WordCounterBasicIntegrationTest {
 
     @Test
     public void TestMainMethod() {

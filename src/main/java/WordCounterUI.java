@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class WordCounterUI {
-    private WordCounter wordCounter = new WordCounter();
+    private WordCounter wordCounter = new WordCounterBasic();
 
     public static void main(String[] args) {
         WordCounterUI wordCounterInterface = new WordCounterUI();
