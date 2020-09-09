@@ -1,7 +1,7 @@
 import java.util.regex.Pattern;
 
 public class WordCounterBasic implements WordCounter {
-    private static final String wordDefinition = "[a-zA-Z]+";
+    protected static final String wordDefinition = "[a-zA-Z]+";
 
     public String[] getSplitStrings(String input) {
         if (input == null || input.isEmpty()) {
