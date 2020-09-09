@@ -40,4 +40,9 @@ public class WordCounterBasicUnitTest {
     public void TestWithWordsAndNonWords() {
         assertEquals(2, wordCounter.countWords("James Bond 73374 23782"));
     }
+
+    @Test
+    public void TestAverageWordLength() {
+        assertEquals(3.6, wordCounter.averageWordLength("Mary had a little lamb"), 0.01);
+    }
 }

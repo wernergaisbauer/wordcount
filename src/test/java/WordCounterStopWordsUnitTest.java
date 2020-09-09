@@ -40,4 +40,14 @@ public class WordCounterStopWordsUnitTest {
     public void TestWithEmptyString() {
         assertEquals(0, wordCounter.countWords(""));
     }
+
+    @Test
+    public void TestAverageWordLength() {
+        assertEquals(4.25, wordCounter.averageWordLength("Mary had a little lamb"), 0.01);
+    }
+
+    @Test
+    public void TestAverageWordLengthHumpty() {
+        assertEquals(6.42, wordCounter.averageWordLength("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall."), 0.01);
+    }
 }

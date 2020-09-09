@@ -24,7 +24,7 @@ public class WordCounterIntegrationTest {
         System.out.flush();
         System.setOut(sysOutBackup);
         String s = new String(baos.toByteArray(), Charset.defaultCharset());
-        assertEquals("Enter text: \n" + "Number of words: 4, unique: 4\n", s);
+        assertEquals("Enter text: \n" + "Number of words: 4, unique: 4; average word length: 4.25\n", s);
     }
 
     @Test
@@ -37,6 +37,6 @@ public class WordCounterIntegrationTest {
         System.out.flush();
         System.setOut(old);
         String s = new String(baos.toByteArray(), Charset.defaultCharset());
-        assertEquals("Number of words: 7, unique: 6\n", s);
+        assertEquals("Number of words: 7, unique: 6; average word length: 6.43\n", s);
     }
 }
