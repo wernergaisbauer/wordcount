@@ -2,7 +2,7 @@ import java.util.Arrays;
 import java.util.regex.Pattern;
 
 public class WordCounterStopWords extends WordCounterBasic {
-    private String[] stopWords;
+    protected String[] stopWords;
 
     public void initStopWords() {
         String text = FileReader.readFile("./src/main/resources/stopwords.txt");
