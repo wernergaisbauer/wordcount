@@ -6,6 +6,7 @@ import java.util.regex.Pattern;
 public class WordCounterUnique extends WordCounterStopWords {
     private Map<String, Integer> words = new HashMap<>();
 
+    @Override
     public int countWords(String text) {
         initStopWords();
         String[] split = getSplitStrings(text);
