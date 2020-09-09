@@ -5,7 +5,17 @@ public class WordCounterUI {
 
     public static void main(String[] args) {
         WordCounterUI wordCounterInterface = new WordCounterUI();
-        wordCounterInterface.countWordsFromCLI();
+        if (args != null && args.length > 0 && args[0] != null) {
+            wordCounterInterface.countWordsFromFile(args[0]);
+        } else {
+            wordCounterInterface.countWordsFromCLI();
+        }
+    }
+
+    private void countWordsFromFile(String fileName) {
+        String text = FileReader.readFile("./src/main/resources/" + fileName);
+        int wordCount = wordCounter.countWords(text);
+        System.out.println("Number of words: " + wordCount);
     }
 
     private void countWordsFromCLI() {
