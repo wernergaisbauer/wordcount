@@ -7,7 +7,7 @@ public class WordCounterBasic implements WordCounter {
         if (input == null || input.isEmpty()) {
             return null;
         }
-        return input.split("\\s+");
+        return input.split("[\\s.-]+");
     }
 
     public int countWords(String text) {
