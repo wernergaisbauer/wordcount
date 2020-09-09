@@ -1,7 +1,8 @@
 import java.util.Scanner;
 
 public class WordCounterUI {
-    private WordCounter wordCounter = new WordCounterStopWords();
+    private WordCounter wordCounterStop = new WordCounterStopWords();
+    private WordCounter wordCounterUnique = new WordCounterUnique();
 
     public static void main(String[] args) {
         WordCounterUI wordCounterInterface = new WordCounterUI();
@@ -14,14 +15,16 @@ public class WordCounterUI {
 
     private void countWordsFromFile(String fileName) {
         String text = FileReader.readFile("./src/main/resources/" + fileName);
-        int wordCount = wordCounter.countWords(text);
-        System.out.println("Number of words: " + wordCount);
+        int wordCountStop = wordCounterStop.countWords(text);
+        int wordCountUnique = wordCounterUnique.countWords(text);
+        System.out.println("Number of words: " + wordCountStop + ", unique: " + wordCountUnique);
     }
 
     private void countWordsFromCLI() {
         String text = readTextFromCLI();
-        int wordCount = wordCounter.countWords(text);
-        System.out.println("Number of words: " + wordCount);
+        int wordCountStop = wordCounterStop.countWords(text);
+        int wordCountUnique = wordCounterUnique.countWords(text);
+        System.out.println("Number of words: " + wordCountStop + ", unique: " + wordCountUnique);
     }
 
     private String readTextFromCLI() {
