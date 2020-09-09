@@ -1,3 +1,4 @@
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class WordCounterUI {
@@ -16,7 +17,10 @@ public class WordCounterUI {
     private void countAndPrintMetrics(String text) {
         int wordCountStop = wordCounterStop.countWords(text);
         int wordCountUnique = wordCounterUnique.countWords(text);
-        System.out.println("Number of words: " + wordCountStop + ", unique: " + wordCountUnique);
+        double averageWordLength = wordCounterStop.averageWordLength(text);
+        DecimalFormat df = new DecimalFormat("#.##");
+        averageWordLength = Double.valueOf(df.format(averageWordLength));
+        System.out.println("Number of words: " + wordCountStop + ", unique: " + wordCountUnique + "; average word length: " + averageWordLength);
     }
 
     private void countWordsFromFile(String fileName) {
