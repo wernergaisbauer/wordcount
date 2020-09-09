@@ -37,6 +37,6 @@ public class WordCounterIntegrationTest {
         System.out.flush();
         System.setOut(old);
         String s = new String(baos.toByteArray(), Charset.defaultCharset());
-        assertEquals("Number of words: 9, unique: 7\n", s);
+        assertEquals("Number of words: 7, unique: 6\n", s);
     }
 }

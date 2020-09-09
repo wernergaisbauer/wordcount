@@ -13,7 +13,7 @@ public class WordCounterUniqueWordsUnitTest {
 
     @Test
     public void TestHumpty() {
-        assertEquals(7, wordCounter.countWords("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall."));
+        assertEquals(6, wordCounter.countWords("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall."));
     }
 
     @Test
@@ -33,7 +33,17 @@ public class WordCounterUniqueWordsUnitTest {
 
     @Test
     public void TestRandomDash() {
-        assertEquals(5, wordCounter.countWords("a-b-c-d-e-f. a b c d e f."));
+        assertEquals(6, wordCounter.countWords("a-b-c-d-e-f. a b c d e f."));
+    }
+
+    @Test
+    public void TestRandomDashMultiple() {
+        assertEquals(4, wordCounter.countWords("a-b-c-d-e-f. a-b c-d-e f."));
+    }
+
+    @Test
+    public void TestRandomDashMultipleWithSpaces() {
+        assertEquals(3, wordCounter.countWords("   abc a-b-c c abc   "));
     }
 
     @Test
