@@ -13,18 +13,20 @@ public class WordCounterUI {
         }
     }
 
-    private void countWordsFromFile(String fileName) {
-        String text = FileReader.readFile("./src/main/resources/" + fileName);
+    private void countAndPrintMetrics(String text) {
         int wordCountStop = wordCounterStop.countWords(text);
         int wordCountUnique = wordCounterUnique.countWords(text);
         System.out.println("Number of words: " + wordCountStop + ", unique: " + wordCountUnique);
     }
 
+    private void countWordsFromFile(String fileName) {
+        String text = FileReader.readFile("./src/main/resources/" + fileName);
+        countAndPrintMetrics(text);
+    }
+
     private void countWordsFromCLI() {
         String text = readTextFromCLI();
-        int wordCountStop = wordCounterStop.countWords(text);
-        int wordCountUnique = wordCounterUnique.countWords(text);
-        System.out.println("Number of words: " + wordCountStop + ", unique: " + wordCountUnique);
+        countAndPrintMetrics(text);
     }
 
     private String readTextFromCLI() {
