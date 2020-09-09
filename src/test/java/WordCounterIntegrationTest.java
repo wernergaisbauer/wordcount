@@ -24,7 +24,7 @@ public class WordCounterIntegrationTest {
         System.out.flush();
         System.setOut(sysOutBackup);
         String s = new String(baos.toByteArray(), Charset.defaultCharset());
-        assertEquals("Enter text: \n" + "Number of words: 4\n", s);
+        assertEquals("Enter text: \n" + "Number of words: 4, unique: 4\n", s);
     }
 
     @Test
@@ -33,10 +33,10 @@ public class WordCounterIntegrationTest {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream out = new PrintStream(baos);
         System.setOut(out);
-        WordCounterUI.main(new String[] {"mytext.txt"});
+        WordCounterUI.main(new String[] {"humpty.txt"});
         System.out.flush();
         System.setOut(old);
         String s = new String(baos.toByteArray(), Charset.defaultCharset());
-        assertEquals("Number of words: 4\n", s);
+        assertEquals("Number of words: 9, unique: 7\n", s);
     }
 }
