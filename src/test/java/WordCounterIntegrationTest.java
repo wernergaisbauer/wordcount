@@ -8,7 +8,7 @@ import java.nio.charset.Charset;
 
 import static org.junit.Assert.assertEquals;
 
-public class WordCounterBasicIntegrationTest {
+public class WordCounterIntegrationTest {
 
     @Test
     public void TestMainMethod() {
@@ -24,6 +24,6 @@ public class WordCounterBasicIntegrationTest {
         System.out.flush();
         System.setOut(sysOutBackup);
         String s = new String(baos.toByteArray(), Charset.defaultCharset());
-        assertEquals("Enter text: \n" + "Number of words: 5\n", s);
+        assertEquals("Enter text: \n" + "Number of words: 4\n", s);
     }
 }
