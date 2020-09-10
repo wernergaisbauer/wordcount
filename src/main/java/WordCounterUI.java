@@ -1,14 +1,20 @@
 import java.text.DecimalFormat;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 public class WordCounterUI {
     private WordCounter wordCounterStop = new WordCounterStopWords();
-    private WordCounter wordCounterUnique = new WordCounterUnique();
+    private WordCounterUnique wordCounterUnique = new WordCounterUnique();
 
     public static void main(String[] args) {
         WordCounterUI wordCounterInterface = new WordCounterUI();
         if (args != null && args.length > 0 && args[0] != null) {
-            wordCounterInterface.countWordsFromFile(args[0]);
+            if (args[0].equals("-index")) {
+                wordCounterInterface.countWordsFromCLIWithIndex();
+            } else {
+                wordCounterInterface.countWordsFromFile(args[0]);
+            }
         } else {
             wordCounterInterface.countWordsFromCLI();
         }
@@ -23,6 +29,14 @@ public class WordCounterUI {
         System.out.println("Number of words: " + wordCountStop + ", unique: " + wordCountUnique + "; average word length: " + averageWordLength);
     }
 
+    private void printIndex(String text) {
+        List<String> index = wordCounterUnique.index(text);
+        System.out.println("Index:");
+        for (String word : index) {
+            System.out.println(word);
+        }
+    }
+
     private void countWordsFromFile(String fileName) {
         String text = FileReader.readFile("./src/main/resources/" + fileName);
         countAndPrintMetrics(text);
@@ -31,6 +45,12 @@ public class WordCounterUI {
     private void countWordsFromCLI() {
         String text = readTextFromCLI();
         countAndPrintMetrics(text);
+    }
+
+    private void countWordsFromCLIWithIndex() {
+        String text = readTextFromCLI();
+        countAndPrintMetrics(text);
+        printIndex(text);
     }
 
     private String readTextFromCLI() {
