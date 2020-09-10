@@ -2,7 +2,7 @@ import java.util.*;
 import java.util.regex.Pattern;
 
 public class WordCounterUnique extends WordCounterStopWords {
-    public String[] initDictionaryWords(String dictionaryFileName) {
+    public String[] getDictionaryWords(String dictionaryFileName) {
         String text = FileReader.readFile("./src/main/resources/" + dictionaryFileName);
         return getSplitStrings(text);
     }
@@ -43,7 +43,7 @@ public class WordCounterUnique extends WordCounterStopWords {
 
     public IndexData indexDictionary(String text, String dictionaryFileName) {
         int unkownWords = 0;
-        String[] dictionaryWords = initDictionaryWords(dictionaryFileName);
+        String[] dictionaryWords = getDictionaryWords(dictionaryFileName);
         List<String> index = index(text);
         if (index == null) return null;
         for (int i = 0; i < index.size(); i++) {
