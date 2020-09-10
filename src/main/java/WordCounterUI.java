@@ -1,6 +1,7 @@
 import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 public class WordCounterUI {
@@ -10,8 +11,16 @@ public class WordCounterUI {
     public static void main(String[] args) {
         WordCounterUI wordCounterInterface = new WordCounterUI();
         if (args != null && args.length > 0 && args[0] != null) {
-            if (args[0].equals("-index")) {
-                wordCounterInterface.countWordsFromCLIWithIndex();
+            if (Arrays.asList(args).contains("-index")) {
+                Optional<String> optional = Arrays.stream(args).filter(arg -> arg.contains("-dictionary")).findFirst();
+                if (optional.isPresent()) {
+                    String[] split = optional.get().split("-dictionary=");
+                    if (split.length > 1) {
+                        wordCounterInterface.countWordsFromCLIWithIndexAndDictionary(split[1]);
+                    }
+                } else {
+                    wordCounterInterface.countWordsFromCLIWithIndex();
+                }
             } else {
                 wordCounterInterface.countWordsFromFile(args[0]);
             }
@@ -25,7 +34,7 @@ public class WordCounterUI {
         int wordCountUnique = wordCounterUnique.countWords(text);
         double averageWordLength = wordCounterStop.averageWordLength(text);
         DecimalFormat df = new DecimalFormat("#.##");
-        averageWordLength = Double.valueOf(df.format(averageWordLength));
+        averageWordLength = Double.parseDouble(df.format(averageWordLength));
         System.out.println("Number of words: " + wordCountStop + ", unique: " + wordCountUnique + "; average word length: " + averageWordLength);
     }
 
@@ -33,6 +42,14 @@ public class WordCounterUI {
         List<String> index = wordCounterUnique.index(text);
         System.out.println("Index:");
         for (String word : index) {
+            System.out.println(word);
+        }
+    }
+
+    private void printIndexDictionary(String text, String dictionaryFileName) {
+        IndexData indexData = wordCounterUnique.indexDictionary(text, dictionaryFileName);
+        System.out.println("Index (unknown: " + indexData.getUnkownWords() + "):");
+        for (String word : indexData.getIndex()) {
             System.out.println(word);
         }
     }
@@ -51,6 +68,12 @@ public class WordCounterUI {
         String text = readTextFromCLI();
         countAndPrintMetrics(text);
         printIndex(text);
+    }
+
+    private void countWordsFromCLIWithIndexAndDictionary(String dictionaryFileName) {
+        String text = readTextFromCLI();
+        countAndPrintMetrics(text);
+        printIndexDictionary(text, dictionaryFileName);
     }
 
     private String readTextFromCLI() {
