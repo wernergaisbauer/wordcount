@@ -2,6 +2,10 @@ import java.util.*;
 import java.util.regex.Pattern;
 
 public class WordCounterUnique extends WordCounterStopWords {
+    public String[] initDictionaryWords(String dictionaryFileName) {
+        String text = FileReader.readFile("./src/main/resources/" + dictionaryFileName);
+        return getSplitStrings(text);
+    }
 
     private Map<String, Integer> getUniqueWords(String text) {
         Map<String, Integer> words = new HashMap<>();
@@ -35,5 +39,20 @@ public class WordCounterUnique extends WordCounterStopWords {
         List<String> index = new ArrayList<>(uniqueWords.keySet());
         index.sort(String::compareToIgnoreCase);
         return index;
+    }
+
+    public IndexData indexDictionary(String text, String dictionaryFileName) {
+        int unkownWords = 0;
+        String[] dictionaryWords = initDictionaryWords(dictionaryFileName);
+        List<String> index = index(text);
+        if (index == null) return null;
+        for (int i = 0; i < index.size(); i++) {
+            String word = index.get(i);
+            if (!Arrays.asList(dictionaryWords).contains(word)) {
+                index.set(i, word + "*");
+                unkownWords++;
+            }
+        }
+        return new IndexData(index, unkownWords);
     }
 }
