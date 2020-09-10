@@ -13,7 +13,8 @@ public class WordCounterIntegrationTest {
     @Test
     public void TestMainMethodCountWordsFromCLI() {
         InputStream sysInBackup = System.in;
-        ByteArrayInputStream bais = new ByteArrayInputStream("Mary had a little lamb".getBytes());
+        String simulatedUserInput = "Mary had a little lamb\n\n";
+        ByteArrayInputStream bais = new ByteArrayInputStream(simulatedUserInput.getBytes());
         System.setIn(bais);
         PrintStream sysOutBackup = System.out;
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -24,8 +25,8 @@ public class WordCounterIntegrationTest {
         System.out.flush();
         System.setOut(sysOutBackup);
         String s = new String(baos.toByteArray(), Charset.defaultCharset());
-        assertEquals("Enter text: \n" +
-                "Number of words: 4, unique: 4; average word length: 4.25\n", s);
+        assertEquals("Enter text: Number of words: 4, unique: 4; average word length: 4.25\n" +
+                "Enter text: ", s);
     }
 
     @Test
@@ -40,10 +41,12 @@ public class WordCounterIntegrationTest {
         String s = new String(baos.toByteArray(), Charset.defaultCharset());
         assertEquals("Number of words: 7, unique: 6; average word length: 6.43\n", s);
     }
+
     @Test
     public void TestMainMethodCountWordsFromCLIWithIndexDictionary() {
         InputStream sysInBackup = System.in;
-        ByteArrayInputStream bais = new ByteArrayInputStream("Mary had a little lamb".getBytes());
+        String simulatedUserInput = "Mary had a little lamb\n\n";
+        ByteArrayInputStream bais = new ByteArrayInputStream(simulatedUserInput.getBytes());
         System.setIn(bais);
         PrintStream sysOutBackup = System.out;
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -54,19 +57,20 @@ public class WordCounterIntegrationTest {
         System.out.flush();
         System.setOut(sysOutBackup);
         String s = new String(baos.toByteArray(), Charset.defaultCharset());
-        assertEquals("Enter text: \n" +
-                "Number of words: 4, unique: 4; average word length: 4.25\n" +
+        assertEquals("Enter text: Number of words: 4, unique: 4; average word length: 4.25\n" +
                 "Index (unknown: 2):\n" +
                 "had\n" +
                 "lamb*\n" +
                 "little\n" +
-                "Mary*\n", s);
+                "Mary*\n" +
+                "Enter text: ", s);
     }
 
     @Test
     public void TestMainMethodCountWordsFromCLIWithIndex() {
         InputStream sysInBackup = System.in;
-        ByteArrayInputStream bais = new ByteArrayInputStream("Mary had a little lamb".getBytes());
+        String simulatedUserInput = "Mary had a little lamb\n\n";
+        ByteArrayInputStream bais = new ByteArrayInputStream(simulatedUserInput.getBytes());
         System.setIn(bais);
         PrintStream sysOutBackup = System.out;
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -77,12 +81,12 @@ public class WordCounterIntegrationTest {
         System.out.flush();
         System.setOut(sysOutBackup);
         String s = new String(baos.toByteArray(), Charset.defaultCharset());
-        assertEquals("Enter text: \n" +
-                "Number of words: 4, unique: 4; average word length: 4.25\n" +
+        assertEquals("Enter text: Number of words: 4, unique: 4; average word length: 4.25\n" +
                 "Index:\n" +
                 "had\n" +
                 "lamb\n" +
                 "little\n" +
-                "Mary\n", s);
+                "Mary\n" +
+                "Enter text: ", s);
     }
 }
