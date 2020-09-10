@@ -61,8 +61,20 @@ public class WordCounterUniqueWordsUnitTest {
     }
 
     @Test
+    public void TestIndexBond() {
+        List<String> index = Arrays.asList("Bond", "is", "My", "name");
+        assertEquals(index, wordCounter.index("    My name is Bond.   "));
+    }
+
+    @Test
     public void TestIndexHumpty() {
         List<String> index = Arrays.asList("fall", "great", "had", "Humpty-Dumpty", "sat", "wall");
         assertEquals(index, wordCounter.index("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall."));
+    }
+
+    @Test
+    public void TestIndexWithEmptyString() {
+        List<String> index = null;
+        assertEquals(index, wordCounter.index(""));
     }
 }
