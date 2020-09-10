@@ -40,6 +40,28 @@ public class WordCounterIntegrationTest {
         String s = new String(baos.toByteArray(), Charset.defaultCharset());
         assertEquals("Number of words: 7, unique: 6; average word length: 6.43\n", s);
     }
+    @Test
+    public void TestMainMethodCountWordsFromCLIWithIndexDictionary() {
+        InputStream sysInBackup = System.in;
+        ByteArrayInputStream bais = new ByteArrayInputStream("Mary had a little lamb".getBytes());
+        System.setIn(bais);
+        PrintStream sysOutBackup = System.out;
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream out = new PrintStream(baos);
+        System.setOut(out);
+        WordCounterUI.main(new String[]{"-index", "-dictionary=dict.txt"});
+        System.setIn(sysInBackup);
+        System.out.flush();
+        System.setOut(sysOutBackup);
+        String s = new String(baos.toByteArray(), Charset.defaultCharset());
+        assertEquals("Enter text: \n" +
+                "Number of words: 4, unique: 4; average word length: 4.25\n" +
+                "Index (unknown: 2):\n" +
+                "had\n" +
+                "lamb*\n" +
+                "little\n" +
+                "Mary*\n", s);
+    }
 
     @Test
     public void TestMainMethodCountWordsFromCLIWithIndex() {

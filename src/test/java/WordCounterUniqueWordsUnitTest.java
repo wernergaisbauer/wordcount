@@ -77,4 +77,25 @@ public class WordCounterUniqueWordsUnitTest {
         List<String> index = null;
         assertEquals(index, wordCounter.index(""));
     }
+
+    @Test
+    public void TestIndexDictionaryMary() {
+        IndexData indexData = new IndexData(Arrays.asList("had", "lamb*", "little", "Mary*"),2);
+        assertEquals(indexData.getIndex(), wordCounter.indexDictionary("Mary had a little lamb", "dict.txt").getIndex());
+        assertEquals(indexData.getUnkownWords(), wordCounter.indexDictionary("Mary had a little lamb", "dict.txt").getUnkownWords());
+    }
+
+    @Test
+    public void TestIndexDictionaryHumpty() {
+        IndexData indexData = new IndexData(Arrays.asList("fall*", "great*", "had", "Humpty-Dumpty*", "sat*", "wall*"),5);
+        assertEquals(indexData.getIndex(), wordCounter.indexDictionary("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.", "dict.txt").getIndex());
+        assertEquals(indexData.getUnkownWords(), wordCounter.indexDictionary("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall.", "dict.txt").getUnkownWords());
+    }
+
+    @Test
+    public void TestIndexDictionaryWithEmptyString() {
+        IndexData indexData = null;
+        assertEquals(indexData, wordCounter.indexDictionary("", "dict.txt"));
+        assertEquals(indexData, wordCounter.indexDictionary("", "dict.txt"));
+    }
 }
