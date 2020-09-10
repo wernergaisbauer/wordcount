@@ -1,10 +1,13 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 
 public class WordCounterUniqueWordsUnitTest {
-    private WordCounter wordCounter;
+    private WordCounterUnique wordCounter;
 
     @Before
     public void init() {
@@ -49,5 +52,17 @@ public class WordCounterUniqueWordsUnitTest {
     @Test
     public void TestWithEmptyString() {
         assertEquals(0, wordCounter.countWords(""));
+    }
+
+    @Test
+    public void TestIndexMary() {
+        List<String> index = Arrays.asList("had", "lamb", "little", "Mary");
+        assertEquals(index, wordCounter.index("Mary had a little lamb"));
+    }
+
+    @Test
+    public void TestIndexHumpty() {
+        List<String> index = Arrays.asList("fall", "great", "had", "Humpty-Dumpty", "sat", "wall");
+        assertEquals(index, wordCounter.index("Humpty-Dumpty sat on a wall. Humpty-Dumpty had a great fall."));
     }
 }
