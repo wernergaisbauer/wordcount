@@ -63,7 +63,7 @@ public class WordCounterUI {
     private void countWordsFromCLI() {
         String text;
         text = readTextFromCLI(sc);
-        while (sc.hasNextLine()) {
+        while (text != null && !text.isEmpty()) {
             countAndPrintMetrics(text);
             text = readTextFromCLI(sc);
         }
