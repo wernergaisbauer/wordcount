@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class WordCounterUI {
     private WordCounter wordCounterStop = new WordCounterStopWords();
     private WordCounterUnique wordCounterUnique = new WordCounterUnique();
+    private Scanner sc = new Scanner(System.in);
 
     public static void main(String[] args) {
         WordCounterUI wordCounterInterface = new WordCounterUI();
@@ -61,37 +62,36 @@ public class WordCounterUI {
 
     private void countWordsFromCLI() {
         String text;
-        text = readTextFromCLI();
-        while (text != null && !text.isEmpty()) {
+        text = readTextFromCLI(sc);
+        while (sc.hasNextLine()) {
             countAndPrintMetrics(text);
-            text = readTextFromCLI();
+            text = readTextFromCLI(sc);
         }
     }
 
     private void countWordsFromCLIWithIndex() {
         String text;
-        text = readTextFromCLI();
+        text = readTextFromCLI(sc);
         while (text != null && !text.isEmpty()) {
             countAndPrintMetrics(text);
             printIndex(text);
-            text = readTextFromCLI();
+            text = readTextFromCLI(sc);
         }
     }
 
     private void countWordsFromCLIWithIndexAndDictionary(String dictionaryFileName) {
         String text;
-        text = readTextFromCLI();
+        text = readTextFromCLI(sc);
         while (text != null && !text.isEmpty()) {
             countAndPrintMetrics(text);
             printIndexDictionary(text, dictionaryFileName);
-            text = readTextFromCLI();
+            text = readTextFromCLI(sc);
         }
     }
 
-    private String readTextFromCLI() {
+    private String readTextFromCLI(Scanner scanner) {
         String text;
         System.out.print("Enter text: ");
-        Scanner scanner = new Scanner(System.in);
         text = scanner.nextLine();
         return text;
     }
