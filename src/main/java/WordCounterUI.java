@@ -60,25 +60,37 @@ public class WordCounterUI {
     }
 
     private void countWordsFromCLI() {
-        String text = readTextFromCLI();
-        countAndPrintMetrics(text);
+        String text;
+        text = readTextFromCLI();
+        while (text != null && !text.isEmpty()) {
+            countAndPrintMetrics(text);
+            text = readTextFromCLI();
+        }
     }
 
     private void countWordsFromCLIWithIndex() {
-        String text = readTextFromCLI();
-        countAndPrintMetrics(text);
-        printIndex(text);
+        String text;
+        text = readTextFromCLI();
+        while (text != null && !text.isEmpty()) {
+            countAndPrintMetrics(text);
+            printIndex(text);
+            text = readTextFromCLI();
+        }
     }
 
     private void countWordsFromCLIWithIndexAndDictionary(String dictionaryFileName) {
-        String text = readTextFromCLI();
-        countAndPrintMetrics(text);
-        printIndexDictionary(text, dictionaryFileName);
+        String text;
+        text = readTextFromCLI();
+        while (text != null && !text.isEmpty()) {
+            countAndPrintMetrics(text);
+            printIndexDictionary(text, dictionaryFileName);
+            text = readTextFromCLI();
+        }
     }
 
     private String readTextFromCLI() {
         String text;
-        System.out.println("Enter text: ");
+        System.out.print("Enter text: ");
         Scanner scanner = new Scanner(System.in);
         text = scanner.nextLine();
         return text;
